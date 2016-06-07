@@ -1,7 +1,7 @@
 function VehicleConstructor(name, x, y, z) {
   var distance_travelled = 0;
   var updateDistanceTravelled = function(){
-    distance_travelled += this.speed;
+    distance_travelled += self.speed;
   }
   var self = this;
   this.name = name;
@@ -9,26 +9,37 @@ function VehicleConstructor(name, x, y, z) {
   this.passengers = y;
   this.speed = z;
   this.move = function(){
-    this.updateDistanceTravelled();
+    updateDistanceTravelled();
     this.makeNoise();
-  }
-  this.checkMiles = function(){
-    console.log(this.distance_travelled);
+    return this;
   }
   this.makeNoise = function(){
     if(this.name == 'bike'){
       console.log('ring ring!')
+      return this;
     }
     if(this.name == 'sedan'){
       console.log('honk honk!')
+      return this;
     }
+  }
+  this.checkMiles = function() {
+    console.log(distance_travelled)
+    return this;
   }
 }
 
 var bike = new VehicleConstructor('bike', 1, 0, 20);
-console.log(bike.move);
-console.log(bike.distance_travelled);
-bike.updateDistanceTravelled();
+bike.move().move().move()
+bike.checkMiles();
+bike.move()
+bike.checkMiles();
+
+
+
+
+
+
 // var sedan = new VehicleConstructor('sedan', 4, 5);
 // console.log(sedan);
 // sedan.makeNoise();
